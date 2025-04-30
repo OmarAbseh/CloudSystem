@@ -35,3 +35,10 @@
         - Associated with:
             - PrivateSubnet-1a
             - PrivateSubnet-1b
+
+## STEP 5 — NAT Gateway
+ - Allocated Elastic IP: CloudSystem-NAT-EIP
+ - Created NAT Gateway: CloudSystem-NATGW in PublicSubnet-1a
+ - Updated Private-RT:
+        - 0.0.0.0/0 → CloudSystem-NATGW
+Private subnets can now reach internet securely.
