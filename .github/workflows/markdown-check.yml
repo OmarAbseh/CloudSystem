@@ -1,0 +1,34 @@
+name: Markdown & File Check
+
+on:
+  push:
+    paths:
+      - '**.md'
+      - '**.png'
+      - '.github/workflows/**'
+      - 'notes/**'
+
+jobs:
+  markdown-lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Lint markdown
+        uses: DavidAnson/markdownlint-cli2-action@v13
+        with:
+          globs: '**/*.md'
+
+  filename-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check lowercase filenames
+        run: |
+          if find . -name "* *" | grep .; then
+            echo "ERROR: Filenames must not contain spaces!"
+            exit 1
+          fi
+          if find . -type f ! -name "$(basename $(echo {} | tr A-Z a-z))" | grep .; then
+            echo "WARNING: Use lowercase filenames."
+          fi
