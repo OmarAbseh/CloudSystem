@@ -41,4 +41,24 @@
  - Created NAT Gateway: CloudSystem-NATGW in PublicSubnet-1a
  - Updated Private-RT:
         - 0.0.0.0/0 → CloudSystem-NATGW
-Private subnets can now reach internet securely.
+ Private subnets can now reach internet securely.
+
+
+## STEP 6 — Security Group + Bastion EC2
+ - Created SG: Bastion-SG
+    - Inbound: SSH (port 22) from my IP only
+    - Outbound: Allow all
+ - Launched EC2: Cloud-Bastion
+    - PublicSubnet-1a
+    - Auto-assign public IP
+    - Connected via SSH
+
+## STEP 7 — Private EC2 + SSH Jump
+ - Created SG: Private-VMs-SG
+    - SSH allowed from Bastion-SG only
+ - Launched EC2: Kali-VM (Ubuntu base)
+    - PrivateSubnet-1a
+    - No public IP
+    - Accessed via SSH jump through bastion
+ - SSH Jump Pattern:
+    - Local → Bastion → Kali
