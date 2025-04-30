@@ -62,3 +62,9 @@
     - Accessed via SSH jump through bastion
  - SSH Jump Pattern:
     - Local → Bastion → Kali
+## STEP 8 — VPC Flow Logs
+ - Created Flow Log for CloudSystem-VPC
+ - Captures: All traffic (accepted + rejected)
+ - Destination: CloudWatch Log Group (`CloudSystem-FlowLogs`)
+ - IAM Role: Auto-created for publishing permissions(CloudSystemFlowRole)
+ - Used for monitoring, audits, and security alerts
