@@ -4,7 +4,8 @@
  - DNS Resolution: Enabled
  - DNS Hostnames: Disabled (to be enabled later)
  - Created via AWS console manually
-## STEP 2 — Subnet Creation
+
+## Step 2 — Subnet Creation
  - Created 2 Public Subnets:
         - `10.0.1.0/24` in AZ `us-east-1a`
         - `10.0.2.0/24` in AZ `us-east-1b`
@@ -17,13 +18,13 @@
         - Public EC2 (bastion, web)
         - Private EC2 (Kali, Windows)
 
-## STEP 3 — Internet Gateway
+## Step 3 — Internet Gateway
  - Created IGW named `CloudSystem-IGW`
  - Attached to CloudSystem-VPC
  - Will update the public route table next to forward 0.0.0.0/0 traffic to IGW
 
 
-## STEP 4 — Route Tables
+## Step 4 — Route Tables
  - Created 2 route tables:
  ### Public-RT
         - Routes 0.0.0.0/0 → CloudSystem-IGW
@@ -36,7 +37,7 @@
             - PrivateSubnet-1a
             - PrivateSubnet-1b
 
-## STEP 5 — NAT Gateway
+## Step 5 — NAT Gateway
  - Allocated Elastic IP: CloudSystem-NAT-EIP
  - Created NAT Gateway: CloudSystem-NATGW in PublicSubnet-1a
  - Updated Private-RT:
@@ -44,7 +45,7 @@
  Private subnets can now reach internet securely.
 
 
-## STEP 6 — Security Group + Bastion EC2
+## Step 6 — Security Group + Bastion EC2
  - Created SG: Bastion-SG
     - Inbound: SSH (port 22) from my IP only
     - Outbound: Allow all
@@ -53,7 +54,7 @@
     - Auto-assign public IP
     - Connected via SSH
 
-## STEP 7 — Private EC2 + SSH Jump
+## Step 7 — Private EC2 + SSH Jump
  - Created SG: Private-VMs-SG
     - SSH allowed from Bastion-SG only
  - Launched EC2: Kali-VM (Ubuntu base)
@@ -62,7 +63,8 @@
     - Accessed via SSH jump through bastion
  - SSH Jump Pattern:
     - Local → Bastion → Kali
-## STEP 8 — VPC Flow Logs
+
+## Step 8 — VPC Flow Logs
  - Created Flow Log for CloudSystem-VPC
  - Captures: All traffic (accepted + rejected)
  - Destination: CloudWatch Log Group (`CloudSystem-FlowLogs`)
