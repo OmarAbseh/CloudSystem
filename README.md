@@ -67,6 +67,8 @@ Detailed logs: `notes/vpc-subnetting.md`
 ├── notes/
 │   └── vpc-subnetting.md
 ├── screenshots/
+│   ├── cloudsystem.png
+│   ├── public-private-subnets.png
 │   └── vpc-creation.png
 ├── .github/
 │   └── workflows/
